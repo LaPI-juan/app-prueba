@@ -128,6 +128,21 @@ elif st.session_state.screen == 2:
 
         temp_png_orgs = st.session_state.temp_png_orgs
 
+		if 'model_std' not in st.session_state:
+
+            url_estandar = 'https://drive.google.com/uc?export=download&id=10BglUsjZLKeeiqpGG5xY-Isy8vGAzrNg'
+            output_estandar = 'modelo_estandar.pt'
+            gdown.download(url_estandar, output_estandar, quiet=False)
+			st.session_state.model_std = output_estandar
+
+            url_LVOT = 'https://drive.google.com/uc?export=download&id=15g-yPz4mVrDpgN4h0tnuuE7dt7-ZxRj_'
+            output_LVOT = 'modelo_LVOT.pt'
+            gdown.download(url_LVOT, output_LVOT, quiet=False)
+			st.session_state.model_LVOT = output_LVOT
+
+		model_std =	st.session_state.model_std
+		model_LVOT = st.session_state.model_LVOT
+
 
         html_3 = f'''
             <div class="card">
@@ -142,7 +157,3 @@ elif st.session_state.screen == 2:
         img_orig_user_1 = Image.open(os.path.join(temp_png_orgs[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
 
         st.image(img_orig_user_1, caption='Original', use_container_width=False)
-
-        url_estandar = 'https://drive.google.com/uc?export=download&id=10BglUsjZLKeeiqpGG5xY-Isy8vGAzrNg'
-        output_estandar = 'modelo_estandar.pt'
-        gdown.download(url_estandar, output_estandar, quiet=False)
