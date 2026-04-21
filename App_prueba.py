@@ -139,4 +139,4 @@ elif st.session_state.screen == 2:
 
         img_orig_user_1 = Image.open(os.path.join(temp_png_orgs[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
 
-        st.image(img_orig_user_1, caption='Original', use_container_widt=Falses)
+        st.image(img_orig_user_1, caption='Original', use_container_widt=False)
