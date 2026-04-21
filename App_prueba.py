@@ -143,6 +143,6 @@ elif st.session_state.screen == 2:
 
         st.image(img_orig_user_1, caption='Original', use_container_width=False)
 
-		url_estandar = 'https://drive.google.com/uc?export=download&id=10BglUsjZLKeeiqpGG5xY-Isy8vGAzrNg'
-		output_estandar = 'modelo_estandar.pt'
-		gdown.download(url_estandar, output_estandar, quiet=False)
+        url_estandar = 'https://drive.google.com/uc?export=download&id=10BglUsjZLKeeiqpGG5xY-Isy8vGAzrNg'
+        output_estandar = 'modelo_estandar.pt'
+        gdown.download(url_estandar, output_estandar, quiet=False)
