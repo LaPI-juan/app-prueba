@@ -6,7 +6,7 @@ import textwrap
 from PIL import Image
 
 #### Funciones propias #### 
-from RotarVolumen import leer_archivos_dicom
+from RotarVolumen import leer_archivos_dicom_mult
 from conversor import carpetaPNG
 
 #### Estilo HTML ####
