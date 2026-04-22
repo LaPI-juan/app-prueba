@@ -5,7 +5,7 @@ import os
 import cv2
 from PIL import Image
 import numpy as np
-from ultralytics import YOLO
+#from ultralytics import YOLO
 
 # ------------------------------------------------------------------------------------
 #                                    Resize3D
@@ -73,61 +73,3 @@ def uso_RUBEN_mult(ruta_modelo, rutas_PNG):
         parametros.append(prm)
 
     return parametros
-# ------------------------------------------------------------------------------------
-#                                 Inferencia YOLO
-# ------------------------------------------------------------------------------------
-def CargarVolumen_YOLO(root):
-    volumeName = root
-    sliceFiles = sorted(os.listdir(volumeName))
-    volumeSlices = []
-    for slice_file in sliceFiles:
-        img_name = os.path.join(volumeName, slice_file)
-        image = Image.open(img_name)
-        volumeSlices.append(np.array(image))
-    volume = np.stack(volumeSlices, axis=0)
-    d, h, w = volume.shape
-    volume = torch.tensor(volume, dtype=torch.float32)
-    volume = Resize3D(target_size=(d,640,640))(volume)
-
-    volume = volume.squeeze(0).unsqueeze(3).repeat(1, 1, 1, 3).numpy().astype(np.uint8)
-
-    return volume
-
-def uso_YOLO(ruta_modelo, ruta_PNG):
-    
-    volumen = CargarVolumen_YOLO(ruta_PNG)
-    img_list = [vol for vol in volumen]
-    
-    model = YOLO(ruta_modelo)
-    results = [model(img) for img in img_list]
-    
-    vol_RGB, vol_masks = [], []
-    indc, i = [], -1
-    
-    for r in results:
-        conf_arr = r[0].boxes.conf.cpu().numpy()
-        if conf_arr.size and conf_arr.max() > 0.65:
-            i += 1
-            j = int(np.argmax(conf_arr))
-            vol_RGB.append(cv2.cvtColor(r[0].plot(),cv2.COLOR_BGR2RGB))
-            vol_masks.append(r[0].masks.data.cpu().numpy()[j,:,:])
-            
-            if r[0].boxes.cls.cpu().numpy()[0] == 0:
-                indc.append(i)
-            else:
-                pass
-        else:
-            pass
-            
-    return np.array(vol_RGB), np.array(vol_masks), indc[0], indc[-1]
-
-def uso_YOLO_mult(ruta_modelo, rutas_PNG):
-    vols_RGB, vols_masks, indcs = [], [], []
-
-    for ruta_PNG in rutas_PNG:
-        vol_RGB, vol_masks, indc_min, indc_max = uso_YOLO(ruta_modelo, ruta_PNG)
-        vols_RGB.append(vol_RGB)
-        vols_masks.append(vol_masks)
-        indcs.append([indc_min, indc_max])
-
-    return vols_RGB, vols_masks, indcs
