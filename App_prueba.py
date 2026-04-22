@@ -153,7 +153,7 @@ elif st.session_state.screen == 2:
         # ------------------------------------------------------------------------------------
         #### Inferencia de los parámetros ####
         if 'p_std' not in st.session_state: 
-            st.session_state.p_std = uso_RUBEN_mult('Transformer_Estandar/mvit_v2_s_estandar.pt',
+            st.session_state.p_std = uso_RUBEN_mult('model_std',
                                                     temp_png_orgs)
         
         p_std = st.session_state.p_std
@@ -187,7 +187,7 @@ elif st.session_state.screen == 2:
         # ------------------------------------------------------------------------------------
         #### Inferencia de los parámetros ####
         if 'p_LVOT' not in st.session_state: 
-            st.session_state.p_LVOT = uso_RUBEN_mult('Transformer_LVOT/mvit_v2_s_lvot.pt',
+            st.session_state.p_LVOT = uso_RUBEN_mult('model_LVOT',
                                                     temp_png_stds)
         
         p_LVOT = st.session_state.p_LVOT
@@ -216,6 +216,38 @@ elif st.session_state.screen == 2:
         
         N_org_1 = st.slider('Volumen',min_value=1, max_value=len(HV_org), step=1,key ='N_org_1')
         N_org_2 = st.slider('Volumen',min_value=1, max_value=HV_org[0].shape[0], step=1,key ='N_org_2')
+
+    	#### Rotación ####
+        if 'HV_LVOT' not in st.session_state:
+            HV_LVOT, _ = process_dicom_mult(p_LVOT,temp_dcm_stds)
+
+            st.session_state.HV_LVOT = HV_LVOT
+
+        HV_LVOT = st.session_state.HV_LVOT
+
+		#### Carpeta temporal PNG ####
+        if 'temp_png_LVOTs' not in st.session_state:
+            
+            st.session_state.temp_png_LVOTs  = [carpetaPNG(V_LVOT,0) for V_LVOT in HV_LVOT]
+            
+        temp_png_LVOTs = st.session_state.temp_png_LVOTs
+
+        html_3 = f'''
+            <div class="card">
+                <h4>Imagenes</h4>
+            </div>
+        '''
+        st.markdown(textwrap.dedent(html_3), unsafe_allow_html=True)
+        
+        N_org_1 = st.slider('Volumen',min_value=1, max_value=len(HV_org), step=1,key ='N_org_1')
+        N_org_2 = st.slider('Volumen',min_value=1, max_value=HV_org[0].shape[0], step=1,key ='N_org_2')
+
+        img_orig_user_1 = Image.open(os.path.join(temp_png_orgs[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
+        img_orig_user_2 = Image.open(os.path.join(temp_png_stds[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
+
+        st.image(img_orig_user_1, caption='Original', use_container_width=False)
+        st.image(img_orig_user_2, caption='Original', use_container_width=False)
+
 
         img_orig_user_1 = Image.open(os.path.join(temp_png_orgs[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
         img_orig_user_2 = Image.open(os.path.join(temp_png_stds[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
