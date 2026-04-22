@@ -234,10 +234,3 @@ elif st.session_state.screen == 2:
 
         st.image(img_orig_user_1, caption='Original', use_container_width=False)
         st.image(img_orig_user_2, caption='Original', use_container_width=False)
-
-
-        img_orig_user_1 = Image.open(os.path.join(temp_png_orgs[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
-        img_orig_user_2 = Image.open(os.path.join(temp_png_stds[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
-
-        st.image(img_orig_user_1, caption='Original', use_container_width=False)
-        st.image(img_orig_user_2, caption='Original', use_container_width=False)
