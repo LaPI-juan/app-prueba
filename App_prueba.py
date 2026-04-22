@@ -8,8 +8,9 @@ import textwrap
 from PIL import Image
 
 #### Funciones propias #### 
-from RotarVolumen import leer_archivos_dicom_mult
-from conversor import carpetaPNG
+from RotarVolumen import leer_archivos_dicom_mult, process_dicom_mult
+from inferencia import uso_RUBEN_mult
+from conversor import carpetaPNG, carpetaDCM
 
 #### Estilo HTML ####
 
@@ -128,6 +129,10 @@ elif st.session_state.screen == 2:
 
         temp_png_orgs = st.session_state.temp_png_orgs
 
+        # ------------------------------------------------------------------------------------
+        #                                      MODELOS
+        # ------------------------------------------------------------------------------------
+
         if 'model_std' not in st.session_state:
 
             url_estandar = 'https://drive.google.com/uc?export=download&id=10BglUsjZLKeeiqpGG5xY-Isy8vGAzrNg'
@@ -143,6 +148,65 @@ elif st.session_state.screen == 2:
         model_std =	st.session_state.model_std
         model_LVOT = st.session_state.model_LVOT
 
+        # ------------------------------------------------------------------------------------
+        #                                   ESTÁNDAR
+        # ------------------------------------------------------------------------------------
+        #### Inferencia de los parámetros ####
+        if 'p_std' not in st.session_state: 
+            st.session_state.p_std = uso_RUBEN_mult('Transformer_Estandar/mvit_v2_s_estandar.pt',
+                                                    temp_png_orgs)
+        
+        p_std = st.session_state.p_std
+
+    	#### Rotación ####
+        if 'HV_std' not in st.session_state:
+            HV_std, spcs_std = process_dicom_mult(p_std,rutas_DCM)
+
+            st.session_state.HV_std = HV_std
+            st.session_state.spcs_std = spcs_std
+
+        spcs_std = st.session_state.spcs_std
+        HV_std = st.session_state.HV_std
+		
+		#### Carpeta temporal DICOM ####
+        if 'temp_dcm_stds' not in st.session_state:		
+
+            st.session_state.temp_dcm_stds = [carpetaDCM(HV_std[i], spcs_std [i]) for i in range(len(HV_std))]
+
+        temp_dcm_stds = st.session_state.temp_dcm_stds
+        
+		#### Carpeta temporal PNG ####
+        if 'temp_png_stds' not in st.session_state:
+            
+            st.session_state.temp_png_stds  = [carpetaPNG(V_std,0) for V_std in HV_std]
+            
+        temp_png_stds = st.session_state.temp_png_stds
+
+        # ------------------------------------------------------------------------------------
+        #                                         LVOT
+        # ------------------------------------------------------------------------------------
+        #### Inferencia de los parámetros ####
+        if 'p_LVOT' not in st.session_state: 
+            st.session_state.p_LVOT = uso_RUBEN_mult('Transformer_LVOT/mvit_v2_s_lvot.pt',
+                                                    temp_png_stds)
+        
+        p_LVOT = st.session_state.p_LVOT
+
+    	#### Rotación ####
+        if 'HV_LVOT' not in st.session_state:
+            HV_LVOT, _ = process_dicom_mult(p_LVOT,temp_dcm_stds)
+
+            st.session_state.HV_LVOT = HV_LVOT
+
+        HV_LVOT = st.session_state.HV_LVOT
+
+		#### Carpeta temporal PNG ####
+        if 'temp_png_LVOTs' not in st.session_state:
+            
+            st.session_state.temp_png_LVOTs  = [carpetaPNG(V_LVOT,0) for V_LVOT in HV_LVOT]
+            
+        temp_png_LVOTs = st.session_state.temp_png_LVOTs
+
         html_3 = f'''
             <div class="card">
                 <h4>Imagenes</h4>
@@ -154,5 +218,7 @@ elif st.session_state.screen == 2:
         N_org_2 = st.slider('Volumen',min_value=1, max_value=HV_org[0].shape[0], step=1,key ='N_org_2')
 
         img_orig_user_1 = Image.open(os.path.join(temp_png_orgs[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
+		img_orig_user_2 = Image.open(os.path.join(temp_png_stds[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
 
         st.image(img_orig_user_1, caption='Original', use_container_width=False)
+		st.image(img_orig_user_2, caption='Original', use_container_width=False)
