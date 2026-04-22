@@ -134,7 +134,7 @@ elif st.session_state.screen == 2:
         # ------------------------------------------------------------------------------------
         #### Inferencia de los parámetros ####
         if 'p_std' not in st.session_state: 
-			url_estandar = 'https://drive.google.com/uc?export=download&id=10BglUsjZLKeeiqpGG5xY-Isy8vGAzrNg'
+            url_estandar = 'https://drive.google.com/uc?export=download&id=10BglUsjZLKeeiqpGG5xY-Isy8vGAzrNg'
             output_estandar = 'modelo_estandar.pt'
             gdown.download(url_estandar, output_estandar, quiet=False)
             st.session_state.p_std = uso_RUBEN_mult('modelo_estandar.pt',
