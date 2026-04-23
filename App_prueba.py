@@ -200,9 +200,6 @@ elif st.session_state.screen == 2:
             </div>
         '''
         st.markdown(textwrap.dedent(html_3), unsafe_allow_html=True)
-        
-        N_org_1 = st.slider('Volumen',min_value=1, max_value=len(HV_org), step=1,key ='N_org_1')
-        N_org_2 = st.slider('Volumen',min_value=1, max_value=HV_org[0].shape[0], step=1,key ='N_org_2')
 
     	#### Rotación ####
         if 'HV_LVOT' not in st.session_state:
