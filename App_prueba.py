@@ -194,13 +194,6 @@ elif st.session_state.screen == 2:
             
         temp_png_LVOTs = st.session_state.temp_png_LVOTs
 
-        html_3 = f'''
-            <div class="card">
-                <h4>Imagenes</h4>
-            </div>
-        '''
-        st.markdown(textwrap.dedent(html_3), unsafe_allow_html=True)
-
     	#### Rotación ####
         if 'HV_LVOT' not in st.session_state:
             HV_LVOT, _ = process_dicom_mult(p_LVOT,temp_dcm_stds)
