@@ -9,7 +9,7 @@ from PIL import Image
 
 #### Funciones propias #### 
 from RotarVolumen import leer_archivos_dicom_mult, process_dicom_mult
-from inferencia import uso_RUBEN_mult, uso_YOLO_mult
+from inferencia import CargarVolumen_YOLO, uso_RUBEN_mult, uso_YOLO_mult
 from conversor import carpetaPNG, carpetaDCM
 
 #### Estilo HTML ####
