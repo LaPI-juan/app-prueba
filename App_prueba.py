@@ -196,7 +196,7 @@ elif st.session_state.screen == 2:
 
         tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
-		with tab1:
+        with tab1:
 	        html_3 = f'''
     	        <div class="card">
         	        <h4>Imagenes</h4>
