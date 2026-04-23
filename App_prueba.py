@@ -192,7 +192,7 @@ elif st.session_state.screen == 2:
             st.session_state.temp_png_LVOTs  = [carpetaPNG(V_LVOT,0) for V_LVOT in HV_LVOT]
             
         temp_png_LVOTs = st.session_state.temp_png_LVOTs
-		st.write('Bandera')
+        st.write('Bandera')
 
         # ------------------------------------------------------------------------------------
         #                                     VALVULA
@@ -204,7 +204,7 @@ elif st.session_state.screen == 2:
             st.session_state.temp_png_valvs = [carpetaPNG(V_valv,0) for V_valv in HV_valv]
 
         temp_png_valvs = st.session_state.temp_png_valvs
-
+        st.write('Bandera')
         # ------------------------------------------------------------------------------------
         #                                    YOLO
         # ------------------------------------------------------------------------------------
@@ -213,7 +213,7 @@ elif st.session_state.screen == 2:
             st.session_state.temp_png_YOLOs  = [carpetaPNG(V_YOLO[:,:,:,0],0) for V_YOLO in HV_YOLO]
 
         temp_png_YOLOs = st.session_state.temp_png_YOLOs
-		
+        st.write('Bandera')
         # ------------------------------------------------------------------------------------
         #                                   DETECCIÓN
         # ------------------------------------------------------------------------------------
@@ -224,7 +224,9 @@ elif st.session_state.screen == 2:
             HV_RGB, HV_masks, Indcs  = uso_YOLO_mult('modelo_YOLO.pt',temp_png_YOLOs)
 
             st.session_state.temp_png_RGB = [carpetaPNG(V_RGB,1) for V_RGB in HV_RGB]
+            st.write('Bandera')
             st.session_state.temp_png_masks = [carpetaPNG(V_masks[:,:,:],0) for V_masks in HV_masks]
+            st.write('Bandera')
             st.session_state.numb_sld = (HV_RGB[0].shape[0], Indcs[0][0], Indcs[0][1])
             st.session_state.INDICES = Indcs
             st.session_state.HV_RGB = HV_RGB
