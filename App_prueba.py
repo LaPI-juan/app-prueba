@@ -206,8 +206,7 @@ elif st.session_state.screen == 2:
         temp_png_valvs = st.session_state.temp_png_valvs
         st.write('Bandera')
         st.write(len(temp_png_valvs))
-        st.write(len(HV_valv))
-        st.write(HV_valv)
+        st.write(len(HV_org))
 
         tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
