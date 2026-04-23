@@ -9,7 +9,7 @@ from PIL import Image
 
 #### Funciones propias #### 
 from RotarVolumen import leer_archivos_dicom_mult, process_dicom_mult
-from inferencia import uso_RUBEN_mult
+from inferencia import uso_RUBEN_mult, uso_YOLO_mult
 from conversor import carpetaPNG, carpetaDCM
 
 #### Estilo HTML ####
@@ -86,7 +86,7 @@ elif st.session_state.screen == 2:
     
     if upload_dcm_1:
         
-        upload_dcms = [upload_dcm_1,upload_dcm_2,upload_dcm_3]#,upload_dcm_4,upload_dcm_5,
+        upload_dcms = [upload_dcm_1]#,upload_dcm_2,upload_dcm_3,upload_dcm_4,upload_dcm_5,
                        #upload_dcm_6,upload_dcm_7,upload_dcm_8,upload_dcm_9,upload_dcm_10,
                        #upload_dcm_11]
         
@@ -193,8 +193,52 @@ elif st.session_state.screen == 2:
             
         temp_png_LVOTs = st.session_state.temp_png_LVOTs
 
+        # ------------------------------------------------------------------------------------
+        #                                     VALVULA
+        # ------------------------------------------------------------------------------------
+        #### Carpeta temporal PNG ####
+        if 'temp_png_valvs' not in st.session_state:
+
+            HV_valv = [[V_LVOT[:,i,:] for i in range(V_LVOT.shape[2])] for V_LVOT in HV_LVOT]
+            st.session_state.temp_png_valvs = [carpetaPNG(V_valv,0) for V_valv in HV_valv]
+
+        temp_png_valvs = st.session_state.temp_png_valvs
+
+        # ------------------------------------------------------------------------------------
+        #                                    YOLO
+        # ------------------------------------------------------------------------------------
+        if 'temp_png_YOLOs' not in st.session_state:
+            HV_YOLO = [CargarVolumen_YOLO(ruta) for ruta in temp_png_valvs]
+            st.session_state.temp_png_YOLOs  = [carpetaPNG(V_YOLO[:,:,:,0],0) for V_YOLO in HV_YOLO]
+
+        temp_png_YOLOs = st.session_state.temp_png_YOLOs
+		
+        # ------------------------------------------------------------------------------------
+        #                                   DETECCIÓN
+        # ------------------------------------------------------------------------------------
+        if 'temp_png_RGB' not in st.session_state:
+            url_LVOT = 'https://drive.google.com/uc?export=download&id=1Xzhx0ge07ceS5SQU8AtG8bHNB1wDt5aC'
+            output_LVOT = 'modelo_YOLO.pt'
+            gdown.download(url_LVOT, output_LVOT, quiet=False)
+            HV_RGB, HV_masks, Indcs  = uso_YOLO_mult('modelo_YOLO.pt',temp_png_YOLOs)
+
+            st.session_state.temp_png_RGB = [carpetaPNG(V_RGB,1) for V_RGB in HV_RGB]
+            st.session_state.temp_png_masks = [carpetaPNG(V_masks[:,:,:],0) for V_masks in HV_masks]
+            st.session_state.numb_sld = (HV_RGB[0].shape[0], Indcs[0][0], Indcs[0][1])
+            st.session_state.INDICES = Indcs
+            st.session_state.HV_RGB = HV_RGB
+
+        numb_sld = st.session_state.numb_sld
+        temp_png_RGB = st.session_state.temp_png_RGB
+        temp_png_masks = st.session_state.temp_png_masks
+        Indcs = st.session_state.INDICES
+        HV_RGB = st.session_state.HV_RGB
+
         tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
+        # ------------------------------------------------------------------------------------
+        #                                   PESTAÑA VISTA ESTANDAR
+        # ------------------------------------------------------------------------------------
         with tab1:
 	        html_3 = f'''
     	        <div class="card">
@@ -214,7 +258,10 @@ elif st.session_state.screen == 2:
         	    st.image(img_orig_user_1, caption='Original', use_container_width=True)
         	with col2:
         	    st.image(img_fnl_user_1, caption='Estandar', use_container_width=True)
-			
+
+        # ------------------------------------------------------------------------------------
+        #                                   PESTAÑA VISTA LVOT
+        # ------------------------------------------------------------------------------------
         with tab2:
 	        html_3 = f'''
     	        <div class="card">
@@ -235,5 +282,8 @@ elif st.session_state.screen == 2:
         	with col2:
         	    st.image(img_fnl_user_2, caption='Estandar', use_container_width=True)
 
+        # ------------------------------------------------------------------------------------
+        #                                   PESTAÑA DETECCION
+        # ------------------------------------------------------------------------------------
         with tab3:
         	st.write('Hola')
