@@ -204,10 +204,10 @@ elif st.session_state.screen == 2:
         	st.markdown(textwrap.dedent(html_3), unsafe_allow_html=True)
         
         	N_org_1 = st.slider('Volumen',min_value=1, max_value=len(HV_org), step=1,key ='N_org1')
-        	N_org_2 = st.slider('Corte',min_value=1, max_value=HV_org[0].shape[0], step=1,key ='N_org2')
+        	N_fnl_1 = st.slider('Corte',min_value=1, max_value=HV_org[0].shape[0], step=1,key ='N_fnl1')
 
-        	img_orig_user_1 = Image.open(os.path.join(temp_png_orgs[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
-        	img_fnl_user_1 = Image.open(os.path.join(temp_png_stds[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
+        	img_orig_user_1 = Image.open(os.path.join(temp_png_orgs[N_org_1-1], f'slice_{(N_fnl_1-1):03d}.png'))
+        	img_fnl_user_1 = Image.open(os.path.join(temp_png_stds[N_org_1-1], f'slice_{(N_fnl_1-1):03d}.png'))
 
         	col1, col2 = st.columns(2)
         	with col1:
@@ -216,7 +216,24 @@ elif st.session_state.screen == 2:
         	    st.image(img_fnl_user_1, caption='Estandar', use_container_width=True)
 			
         with tab2:
-        	st.write('Hola')
+	        html_3 = f'''
+    	        <div class="card">
+        	        <h4>Imagenes</h4>
+            	</div>
+        	'''
+        	st.markdown(textwrap.dedent(html_3), unsafe_allow_html=True)
+        
+        	N_org_2 = st.slider('Volumen',min_value=1, max_value=len(HV_org), step=1,key ='N_org2')
+        	N_fnl_2 = st.slider('Corte',min_value=1, max_value=HV_org[0].shape[0], step=1,key ='N_fnl2')
+
+        	img_orig_user_2 = Image.open(os.path.join(temp_png_orgs[N_org_2-1], f'slice_{(N_fnl_2-1):03d}.png'))
+        	img_fnl_user_2 = Image.open(os.path.join(temp_png_stds[N_org_2-1], f'slice_{(N_fnl_2-1):03d}.png'))
+
+        	col1, col2 = st.columns(2)
+        	with col1:
+        	    st.image(img_orig_user_2, caption='Original', use_container_width=True)
+        	with col2:
+        	    st.image(img_fnl_user_2, caption='Estandar', use_container_width=True)
 
         with tab3:
         	st.write('Hola')
