@@ -192,6 +192,7 @@ elif st.session_state.screen == 2:
             st.session_state.temp_png_LVOTs  = [carpetaPNG(V_LVOT,0) for V_LVOT in HV_LVOT]
             
         temp_png_LVOTs = st.session_state.temp_png_LVOTs
+		st.write('Bandera')
 
         # ------------------------------------------------------------------------------------
         #                                     VALVULA
