@@ -205,6 +205,7 @@ elif st.session_state.screen == 2:
 
         temp_png_valvs = st.session_state.temp_png_valvs
         st.write('Bandera')
+		st.write(len(temp_png_valvs))
         # ------------------------------------------------------------------------------------
         #                                    YOLO
         # ------------------------------------------------------------------------------------
