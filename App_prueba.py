@@ -215,8 +215,8 @@ elif st.session_state.screen == 2:
         	with col2:
         	    st.image(img_fnl_user_1, caption='Estandar', use_container_width=True)
 			
-		with tab2:
-			st.write('Hola')
+        with tab2:
+        	st.write('Hola')
 
-		with tab3:
-			st.write('Hola')
+        with tab3:
+        	st.write('Hola')
