@@ -194,36 +194,30 @@ elif st.session_state.screen == 2:
             
         temp_png_LVOTs = st.session_state.temp_png_LVOTs
 
-    	#### Rotación ####
-        if 'HV_LVOT' not in st.session_state:
-            HV_LVOT, _ = process_dicom_mult(p_LVOT,temp_dcm_stds)
+        tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
-            st.session_state.HV_LVOT = HV_LVOT
-
-        HV_LVOT = st.session_state.HV_LVOT
-
-		#### Carpeta temporal PNG ####
-        if 'temp_png_LVOTs' not in st.session_state:
-            
-            st.session_state.temp_png_LVOTs  = [carpetaPNG(V_LVOT,0) for V_LVOT in HV_LVOT]
-            
-        temp_png_LVOTs = st.session_state.temp_png_LVOTs
-
-        html_3 = f'''
-            <div class="card">
-                <h4>Imagenes</h4>
-            </div>
-        '''
-        st.markdown(textwrap.dedent(html_3), unsafe_allow_html=True)
+		with tab1:
+	        html_3 = f'''
+    	        <div class="card">
+        	        <h4>Imagenes</h4>
+            	</div>
+        	'''
+        	st.markdown(textwrap.dedent(html_3), unsafe_allow_html=True)
         
-        N_org_1 = st.slider('Volumen',min_value=1, max_value=len(HV_org), step=1,key ='N_org1')
-        N_org_2 = st.slider('Volumen',min_value=1, max_value=HV_org[0].shape[0], step=1,key ='N_org2')
+        	N_org_1 = st.slider('Volumen',min_value=1, max_value=len(HV_org), step=1,key ='N_org1')
+        	N_org_2 = st.slider('Corte',min_value=1, max_value=HV_org[0].shape[0], step=1,key ='N_org2')
 
-        img_orig_user_1 = Image.open(os.path.join(temp_png_orgs[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
-        img_fnl_user_1 = Image.open(os.path.join(temp_png_stds[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
+        	img_orig_user_1 = Image.open(os.path.join(temp_png_orgs[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
+        	img_fnl_user_1 = Image.open(os.path.join(temp_png_stds[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
 
-        col1, col2 = st.columns(2)
-        with col1:
-            st.image(img_orig_user_1, caption='Original', use_container_width=True)
-        with col2:
-            st.image(img_fnl_user_1, caption='Estandar', use_container_width=True)
+        	col1, col2 = st.columns(2)
+        	with col1:
+            	st.image(img_orig_user_1, caption='Original', use_container_width=True)
+        	with col2:
+            	st.image(img_fnl_user_1, caption='Estandar', use_container_width=True)
+			
+		with tab2:
+			st.write('Hola')
+
+		with tab3:
+			st.write('Hola')
