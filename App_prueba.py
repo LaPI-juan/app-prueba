@@ -211,9 +211,9 @@ elif st.session_state.screen == 2:
 
         	col1, col2 = st.columns(2)
         	with col1:
-            	st.image(img_orig_user_1, caption='Original', use_container_width=True)
+        	    st.image(img_orig_user_1, caption='Original', use_container_width=True)
         	with col2:
-            	st.image(img_fnl_user_1, caption='Estandar', use_container_width=True)
+        	    st.image(img_fnl_user_1, caption='Estandar', use_container_width=True)
 			
 		with tab2:
 			st.write('Hola')
