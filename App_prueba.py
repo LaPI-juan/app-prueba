@@ -220,7 +220,10 @@ elif st.session_state.screen == 2:
         N_org_2 = st.slider('Volumen',min_value=1, max_value=HV_org[0].shape[0], step=1,key ='N_org2')
 
         img_orig_user_1 = Image.open(os.path.join(temp_png_orgs[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
-        img_orig_user_2 = Image.open(os.path.join(temp_png_stds[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
+        img_fnl_user_1 = Image.open(os.path.join(temp_png_stds[N_org_1-1], f'slice_{(N_org_2-1):03d}.png'))
 
-        st.image(img_orig_user_1, caption='Original', use_container_width=False)
-        st.image(img_orig_user_2, caption='Original', use_container_width=False)
+        col1, col2 = st.columns(2)
+        with col1:
+            st.image(img_orig_user_1, caption='Original', use_container_width=True)
+        with col2:
+            st.image(img_fnl_user_1, caption='Estandar', use_container_width=True)
