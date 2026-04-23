@@ -206,37 +206,6 @@ elif st.session_state.screen == 2:
         temp_png_valvs = st.session_state.temp_png_valvs
         st.write('Bandera')
         st.write(len(temp_png_valvs))
-        # ------------------------------------------------------------------------------------
-        #                                    YOLO
-        # ------------------------------------------------------------------------------------
-        if 'temp_png_YOLOs' not in st.session_state:
-            HV_YOLO = [CargarVolumen_YOLO(ruta) for ruta in temp_png_valvs]
-            st.session_state.temp_png_YOLOs  = [carpetaPNG(V_YOLO[:,:,:,0],0) for V_YOLO in HV_YOLO]
-
-        temp_png_YOLOs = st.session_state.temp_png_YOLOs
-        st.write('Bandera')
-        # ------------------------------------------------------------------------------------
-        #                                   DETECCIÓN
-        # ------------------------------------------------------------------------------------
-        if 'temp_png_RGB' not in st.session_state:
-            url_LVOT = 'https://drive.google.com/uc?export=download&id=1Xzhx0ge07ceS5SQU8AtG8bHNB1wDt5aC'
-            output_LVOT = 'modelo_YOLO.pt'
-            gdown.download(url_LVOT, output_LVOT, quiet=False)
-            HV_RGB, HV_masks, Indcs  = uso_YOLO_mult('modelo_YOLO.pt',temp_png_YOLOs)
-
-            st.session_state.temp_png_RGB = [carpetaPNG(V_RGB,1) for V_RGB in HV_RGB]
-            st.write('Bandera')
-            st.session_state.temp_png_masks = [carpetaPNG(V_masks[:,:,:],0) for V_masks in HV_masks]
-            st.write('Bandera')
-            st.session_state.numb_sld = (HV_RGB[0].shape[0], Indcs[0][0], Indcs[0][1])
-            st.session_state.INDICES = Indcs
-            st.session_state.HV_RGB = HV_RGB
-
-        numb_sld = st.session_state.numb_sld
-        temp_png_RGB = st.session_state.temp_png_RGB
-        temp_png_masks = st.session_state.temp_png_masks
-        Indcs = st.session_state.INDICES
-        HV_RGB = st.session_state.HV_RGB
 
         tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
@@ -255,7 +224,7 @@ elif st.session_state.screen == 2:
         	N_fnl_1 = st.slider('Corte',min_value=1, max_value=HV_org[0].shape[0], step=1,key ='N_fnl1')
 
         	img_orig_user_1 = Image.open(os.path.join(temp_png_orgs[N_org_1-1], f'slice_{(N_fnl_1-1):03d}.png'))
-        	img_fnl_user_1 = Image.open(os.path.join(temp_png_stds[N_org_1-1], f'slice_{(N_fnl_1-1):03d}.png'))
+        	img_fnl_user_1 = Image.open(os.path.join(temp_png_valvs[N_org_1-1], f'slice_{(N_fnl_1-1):03d}.png'))
 
         	col1, col2 = st.columns(2)
         	with col1:
