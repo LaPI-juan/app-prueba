@@ -9,7 +9,7 @@ from PIL import Image
 
 #### Funciones propias #### 
 from RotarVolumen import leer_archivos_dicom_mult, process_dicom_mult
-from inferencia import cargarVolumen_YOLO, uso_RUBEN_mult, uso_YOLO_mult
+from inferencia import CargarVolumen_YOLO, uso_RUBEN_mult, uso_YOLO_mult
 from conversor import carpetaPNG, carpetaDCM
 
 #### Estilo HTML ####
@@ -199,18 +199,19 @@ elif st.session_state.screen == 2:
         # ------------------------------------------------------------------------------------
         #### Carpeta temporal PNG ####
         if 'temp_png_valvs' not in st.session_state:
-
             HV_valv = [[V_LVOT[:,i,:] for i in range(V_LVOT.shape[2])] for V_LVOT in HV_LVOT]
             st.session_state.temp_png_valvs = [carpetaPNG(V_valv,0) for V_valv in HV_valv]
 
         temp_png_valvs = st.session_state.temp_png_valvs
         st.write('Bandera')
+        st.write(HV_valv)
 
         # ------------------------------------------------------------------------------------
         #                                    YOLO
         # ------------------------------------------------------------------------------------
         if 'temp_png_YOLOs' not in st.session_state:
-            HV_YOLO = [cargarVolumen_YOLO(ruta) for ruta in temp_png_valvs]
+            HV_YOLO = [CargarVolumen_YOLO(ruta) for ruta in temp_png_valvs]
+            st.write(HV_YOLO)
             st.session_state.temp_png_YOLOs  = [carpetaPNG(V_YOLO[:,:,:,0],0) for V_YOLO in HV_YOLO]
         temp_png_YOLOs = st.session_state.temp_png_YOLOs
 		
