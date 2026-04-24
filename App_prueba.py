@@ -209,11 +209,11 @@ elif st.session_state.screen == 2:
         # ------------------------------------------------------------------------------------
         #                                    YOLO
         # ------------------------------------------------------------------------------------
-        if 'temp_png_YOLOs' not in st.session_state:
-            HV_YOLO = [CargarVolumen_YOLO(ruta) for ruta in temp_png_valvs]
-            st.write(HV_YOLO)
-            #st.session_state.temp_png_YOLOs  = [carpetaPNG(V_YOLO[:,:,:,0],0) for V_YOLO in HV_YOLO]
-        #temp_png_YOLOs = st.session_state.temp_png_YOLOs
+#        if 'temp_png_YOLOs' not in st.session_state:
+#            HV_YOLO = [CargarVolumen_YOLO(ruta) for ruta in temp_png_valvs]
+#            st.write(HV_YOLO)
+#            st.session_state.temp_png_YOLOs  = [carpetaPNG(V_YOLO[:,:,:,0],0) for V_YOLO in HV_YOLO]
+#        temp_png_YOLOs = st.session_state.temp_png_YOLOs
 		
         tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
