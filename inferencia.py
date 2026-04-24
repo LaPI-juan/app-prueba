@@ -76,7 +76,7 @@ def uso_RUBEN_mult(ruta_modelo, rutas_PNG):
 # ------------------------------------------------------------------------------------
 #                                 Inferencia YOLO
 # ------------------------------------------------------------------------------------
-def cargarVolumen_YOLO(root):
+def CargarVolumen_YOLO(root):
     volumeName = root
     sliceFiles = sorted(os.listdir(volumeName))
     volumeSlices = []
@@ -95,7 +95,7 @@ def cargarVolumen_YOLO(root):
 
 def uso_YOLO(ruta_modelo, ruta_PNG):
     
-    volumen = cargarVolumen_YOLO(ruta_PNG)
+    volumen = CargarVolumen_YOLO(ruta_PNG)
     img_list = [vol for vol in volumen]
     
     model = YOLO(ruta_modelo)
