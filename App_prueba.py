@@ -9,7 +9,7 @@ from PIL import Image
 
 #### Funciones propias ####
 from RotarVolumen import leer_archivos_dicom_mult, process_dicom_mult
-from inferencia import uso_RUBEN_mult, uso_YOLO_mult
+from inferencia import uso_RUBEN_mult, uso_YOLO_mult, CargarVolumen_YOLO
 from conversor import carpetaPNG, carpetaDCM
 
 #### Estilo HTML ####
@@ -86,7 +86,7 @@ elif st.session_state.screen == 2:
     
     if upload_dcm_1:
         
-        upload_dcms = [upload_dcm_1,upload_dcm_2]#,upload_dcm_3,upload_dcm_4,upload_dcm_5,
+        upload_dcms = [upload_dcm_1]#,upload_dcm_2,upload_dcm_3,upload_dcm_4,upload_dcm_5,
                        #upload_dcm_6,upload_dcm_7,upload_dcm_8,upload_dcm_9,upload_dcm_10,
                        #upload_dcm_11]
         
@@ -207,11 +207,11 @@ elif st.session_state.screen == 2:
         #                                    YOLO
         # ------------------------------------------------------------------------------------
         if 'temp_png_YOLOs' not in st.session_state:
-            url_YOLO = 'https://drive.google.com/uc?export=download&id=1Xzhx0ge07ceS5SQU8AtG8bHNB1wDt5aC'
-            output_YOLO = 'modelo_YOLO.pt'
-            gdown.download(url_YOLO, output_YOLO, quiet=False)
-            HV_YOLO, HV_RGB, HV_masks, Indcs = uso_YOLO_mult('modelo_YOLO.pt',temp_png_valvs)
-            
+            HV_YOLO = [CargarVolumen_YOLO(ruta) for ruta in temp_png_valvs[0:10]]
+            st.session_state.temp_png_YOLOs = [carpetaPNG(V_YOLO[:,:,:,0],0) for V_YOLO in HV_YOLO]
+
+        temp_png_YOLOs = st.session_state.temp_png_YOLOs
+
         tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
         # ------------------------------------------------------------------------------------
