@@ -86,7 +86,7 @@ elif st.session_state.screen == 2:
     
     if upload_dcm_1:
         
-        upload_dcms = [upload_dcm_1]#,upload_dcm_2,upload_dcm_3,upload_dcm_4,upload_dcm_5,
+        upload_dcms = [upload_dcm_1,upload_dcm_2]#,upload_dcm_3,upload_dcm_4,upload_dcm_5,
                        #upload_dcm_6,upload_dcm_7,upload_dcm_8,upload_dcm_9,upload_dcm_10,
                        #upload_dcm_11]
         
