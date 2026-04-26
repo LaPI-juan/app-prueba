@@ -8,10 +8,9 @@ import textwrap
 from PIL import Image
 
 #### Funciones propias ####
-from AllAll import leer_archivos_dicom_mult,process_dicom_mult,uso_RUBEN_mult,CargarVolumen_YOLO,uso_YOLO_mult,carpetaPNG,carpetaDCM
-#from RotarVolumen import leer_archivos_dicom_mult, process_dicom_mult
-#from inferencia import uso_RUBEN_mult, CargarVolumen_YOLO, uso_YOLO_mult
-#from conversor import carpetaPNG, carpetaDCM
+from RotarVolumen import leer_archivos_dicom_mult, process_dicom_mult
+from inferencia import uso_RUBEN_mult, uso_YOLO_mult
+from conversor import carpetaPNG, carpetaDCM
 
 #### Estilo HTML ####
 
@@ -207,9 +206,12 @@ elif st.session_state.screen == 2:
         # ------------------------------------------------------------------------------------
         #                                    YOLO
         # ------------------------------------------------------------------------------------
-        if 'HV_YOLO' not in st.session_state:
-            st.session_state.HV_YOLO = [CargarVolumen_YOLO(ruta) for ruta in temp_png_valvs]
-		
+        if 'temp_png_YOLOs' not in st.session_state:
+            url_YOLO = 'https://drive.google.com/uc?export=download&id=1Xzhx0ge07ceS5SQU8AtG8bHNB1wDt5aC'
+            output_YOLO = 'modelo_YOLO.pt'
+            gdown.download(url_YOLO, output_YOLO, quiet=False)
+			HV_YOLO, HV_RGB, HV_masks, Indcs = uso_YOLO_mult('modelo_YOLO.pt',temp_png_valvs)
+            
         tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
         # ------------------------------------------------------------------------------------
