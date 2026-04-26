@@ -3,7 +3,7 @@ numpy
 matplotlib
 gdown
 SimpleITK
-opencv-python-headless
 torch
 torchvision
 ultralytics
+opencv-python-headless
