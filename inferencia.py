@@ -126,7 +126,7 @@ def uso_YOLO_mult(ruta_modelo, rutas_PNG):
 
     for ruta_PNG in rutas_PNG:
         vol_YOLO, vol_RGB, vol_masks, indc_min, indc_max = uso_YOLO(ruta_modelo, ruta_PNG)
-		vols_YOLO.append(vol_YOLO)
+        vols_YOLO.append(vol_YOLO)
         vols_RGB.append(vol_RGB)
         vols_masks.append(vol_masks)
         indcs.append([indc_min, indc_max])
