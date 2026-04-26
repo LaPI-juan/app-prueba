@@ -142,7 +142,7 @@ def img_slc(Vol,img_mode,SliceNum):
         Vol_norm = (Vol_raw-np.min(Vol_raw))/(np.max(Vol_raw)-np.min(Vol_raw))
         Vol_img = (Vol_norm*255).astype(np.uint8)
         img_user = Image.fromarray(Vol_img,mode='L')
-
+		
     else:
         Vol_raw = Vol[SliceNum,:,:,:]
         Vol_norm = (Vol_raw-np.min(Vol_raw))/(np.max(Vol_raw)-np.min(Vol_raw))
