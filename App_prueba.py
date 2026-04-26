@@ -202,7 +202,7 @@ elif st.session_state.screen == 2:
             st.session_state.temp_png_valvs = [carpetaPNG(V_valv,0) for V_valv in HV_valv]
 
         temp_png_valvs = st.session_state.temp_png_valvs
-		st.write(temp_png_valvs[0:4])
+        st.write(temp_png_valvs[0:4])
 		
         # ------------------------------------------------------------------------------------
         #                                    YOLO
