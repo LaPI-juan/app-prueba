@@ -210,7 +210,7 @@ elif st.session_state.screen == 2:
             url_YOLO = 'https://drive.google.com/uc?export=download&id=1Xzhx0ge07ceS5SQU8AtG8bHNB1wDt5aC'
             output_YOLO = 'modelo_YOLO.pt'
             gdown.download(url_YOLO, output_YOLO, quiet=False)
-			HV_YOLO, HV_RGB, HV_masks, Indcs = uso_YOLO_mult('modelo_YOLO.pt',temp_png_valvs)
+            HV_YOLO, HV_RGB, HV_masks, Indcs = uso_YOLO_mult('modelo_YOLO.pt',temp_png_valvs)
             
         tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
