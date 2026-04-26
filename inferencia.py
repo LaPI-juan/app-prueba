@@ -95,8 +95,8 @@ def CargarVolumen_YOLO(root):
 
 def uso_YOLO(ruta_modelo, ruta_PNG):
     
-    volumen = CargarVolumen_YOLO(ruta_PNG)
-    img_list = [vol for vol in volumen]
+    vol_in = CargarVolumen_YOLO(ruta_PNG)
+    img_list = [vol for vol in vol_in]
     
     model = YOLO(ruta_modelo)
     results = [model(img) for img in img_list]
@@ -119,15 +119,16 @@ def uso_YOLO(ruta_modelo, ruta_PNG):
         else:
             pass
             
-    return np.array(vol_RGB), np.array(vol_masks), indc[0], indc[-1]
+    return np.array(vol_in), np.array(vol_RGB), np.array(vol_masks), indc[0], indc[-1]
 
 def uso_YOLO_mult(ruta_modelo, rutas_PNG):
-    vols_RGB, vols_masks, indcs = [], [], []
+    vols_YOLO, vols_RGB, vols_masks, indcs = [], [], [], []
 
     for ruta_PNG in rutas_PNG:
-        vol_RGB, vol_masks, indc_min, indc_max = uso_YOLO(ruta_modelo, ruta_PNG)
+        vol_YOLO, vol_RGB, vol_masks, indc_min, indc_max = uso_YOLO(ruta_modelo, ruta_PNG)
+		vols_YOLO.append(vol_YOLO)
         vols_RGB.append(vol_RGB)
         vols_masks.append(vol_masks)
         indcs.append([indc_min, indc_max])
 
-    return vols_RGB, vols_masks, indcs
+    return vols_YOLO, vols_RGB, vols_masks, indcs
