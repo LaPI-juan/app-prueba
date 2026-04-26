@@ -202,8 +202,8 @@ elif st.session_state.screen == 2:
             st.session_state.temp_png_valvs = [carpetaPNG(V_valv,0) for V_valv in HV_valv]
 
         temp_png_valvs = st.session_state.temp_png_valvs
-		HV_YOLO = [CargarVolumen_YOLO(ruta) for ruta in temp_png_valvs]
-		st.write(HV_YOLO)
+        HV_YOLO = [CargarVolumen_YOLO(ruta) for ruta in temp_png_valvs]
+        st.write(HV_YOLO)
 		
         # ------------------------------------------------------------------------------------
         #                                    YOLO
