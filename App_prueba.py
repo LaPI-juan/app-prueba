@@ -216,8 +216,10 @@ elif st.session_state.screen == 2:
         if 'temp_png_YOLOs' not in st.session_state:
             HV_YOLO = [[CargarVolumen_YOLO(ruta) for ruta in rutas] for rutas in temp_png_valvs_chico]
             st.session_state.temp_png_YOLOs = [carpetaPNG(V_YOLO[:,:,:,0],0) for V_YOLO in HV_YOLO]
+            st.session_state.HV_YOLO = HV_YOLO
 
         temp_png_YOLOs = st.session_state.temp_png_YOLOs
+        HV_YOLO = st.session_state.HV_YOLO
 
         tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
