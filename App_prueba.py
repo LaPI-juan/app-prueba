@@ -212,7 +212,7 @@ elif st.session_state.screen == 2:
         HV_valv = st.session_state.HV_valv 
         temp_png_valvs = st.session_state.temp_png_valvs
  #       temp_png_valvs_chico = st.session_state.temp_png_valvs_chico
-        st.write(HV_valv_numpy[0,:,:].shape)
+        st.write(HV_valv_numpy[:,0,:,:].shape)
 #        paths_png_valvs = st.session_state.paths_png_valvs
 #        st.write(temp_png_valvs)
 #        st.write(paths_png_valvs[0:4])
