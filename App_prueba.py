@@ -219,7 +219,8 @@ elif st.session_state.screen == 2:
 			
         HV_YOLO = st.session_state.HV_YOLO
         st.write(len(HV_YOLO))
-        st.write(HV_YOLO[0].shape)
+        st.write(len(HV_YOLO[0]))
+        st.write(HV_YOLO[0][0].shape)
         #temp_png_YOLOs = st.session_state.temp_png_YOLOs
         #st.write(len(temp_png_YOLOs))
         #st.write(len(temp_png_YOLOs[0]))
