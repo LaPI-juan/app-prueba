@@ -201,10 +201,10 @@ elif st.session_state.screen == 2:
         if 'temp_png_valvs' not in st.session_state:
             HV_valv = [[V_LVOT[:,i,:] for i in range(V_LVOT.shape[2])] for V_LVOT in HV_LVOT]
             st.session_state.temp_png_valvs = [carpetaPNG(V_valv,0) for V_valv in HV_valv]
-            HV_valv_np = np.array(HV_valv)
-            st.session_state.temp_png_valvs_chico = [carpetaPNG(HV_valv_np[:,i,:,:],0) for i in range(0,512)]
+#            HV_valv_np = np.array(HV_valv)
+#            st.session_state.temp_png_valvs_chico = [carpetaPNG(HV_valv_np[:,i,:,:],0) for i in range(0,512)]
             HV_valv_NP = [np.array(V_valv) for V_valv in HV_valv]
-            #st.session_state.temp_png_valvs_chico = [[carpetaPNG(np.array(V_valv)[:,i,:,:]),0) for i in range(0,512)] for V_valv in HV_valv]  
+            st.session_state.temp_png_valvs_chico = [[carpetaPNG(V_np[np.newaxis,i,:,:],0) for i in range(0,512)] for V_np in HV_valv_NP]
 
         temp_png_valvs = st.session_state.temp_png_valvs
         temp_png_valvs_chico = st.session_state.temp_png_valvs_chico
