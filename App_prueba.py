@@ -208,8 +208,8 @@ elif st.session_state.screen == 2:
 
         temp_png_valvs = st.session_state.temp_png_valvs
         temp_png_valvs_chico = st.session_state.temp_png_valvs_chico
-        st.write(len(HV_YOLO))
-        st.write(len(HV_YOLO[0]))
+        st.write(len(HV_valv))
+        st.write(len(HV_valv[0]))
 		
         # ------------------------------------------------------------------------------------
         #                                    YOLO
