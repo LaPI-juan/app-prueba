@@ -221,7 +221,7 @@ elif st.session_state.screen == 2:
 #            st.session_state.temp_png_YOLOs = [carpetaPNG(V_YOLO[:,:,:,0],0) for V_YOLO in HV_YOLO]
             rutas_valvs = [os.path.join(temp_png_valvs[0], f) for f in sorted(os.listdir(temp_png_valvs[0]))[:1]]
             st.session_state.rutas_valvs = rutas_valvs
-            HV_YOLO = [CargarVolumen_YOLO(ruta) for ruta in rutas_valvs]
+            #HV_YOLO = [CargarVolumen_YOLO(ruta) for ruta in rutas_valvs]
 
         rutas_valvs = st.session_state.rutas_valvs
         st.write(rutas_valvs)
