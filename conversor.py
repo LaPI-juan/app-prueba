@@ -33,13 +33,15 @@ def carpetaPNG(Vol,img_mode):
     Vol = np.array(Vol)
 
     temp_png = tempfile.mkdtemp()
-
+    png_paths = []
+    
     for i in range(Vol.shape[0]):
         img_png = img_slc(Vol,img_mode,i)
         path = os.path.join(temp_png, f'slice_{i:03d}.png')
         img_png.save(path)
+        png_paths.append(path)
 
-    return temp_png
+    return temp_png, png_paths
 
 # ------------------------------------------------------------------------------------
 #                                    Carpeta DCM
