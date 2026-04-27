@@ -206,12 +206,13 @@ elif st.session_state.screen == 2:
 #            st.session_state.paths_png_valvs = paths_png_valvs 
             st.session_state.temp_png_valvs = [carpetaPNG(V_valv,0) for V_valv in HV_valv]
 #            st.session_state.temp_png_valvs_chico = [carpetaPNG(V_valv[0:4],0) for V_valv in HV_valv]
+            HV_valv_numpy = np.array(HV_valv)
 #            st.session_state.temp_png_valvs_chico = [carpetaPNG(HV_valv[0],0) for S_valv in HV_valv[0]]
 
         HV_valv = st.session_state.HV_valv 
         temp_png_valvs = st.session_state.temp_png_valvs
  #       temp_png_valvs_chico = st.session_state.temp_png_valvs_chico
-        st.write(HV_valv[0][0:1])
+        st.write(HV_valv_numpy.shape)
 #        paths_png_valvs = st.session_state.paths_png_valvs
 #        st.write(temp_png_valvs)
 #        st.write(paths_png_valvs[0:4])
