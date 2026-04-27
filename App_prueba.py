@@ -6,6 +6,7 @@ import os
 import requests
 import textwrap
 from PIL import Image
+import numpy as np
 
 #### Funciones propias ####
 from RotarVolumen import leer_archivos_dicom_mult, process_dicom_mult
