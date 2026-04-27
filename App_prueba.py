@@ -208,7 +208,6 @@ elif st.session_state.screen == 2:
 
         temp_png_valvs = st.session_state.temp_png_valvs
         temp_png_valvs_chico = st.session_state.temp_png_valvs_chico
-#        st.write(HV_valv_NP[0].shape)
 		
         # ------------------------------------------------------------------------------------
         #                                    YOLO
@@ -220,6 +219,8 @@ elif st.session_state.screen == 2:
 
         temp_png_YOLOs = st.session_state.temp_png_YOLOs
         HV_YOLO = st.session_state.HV_YOLO
+        st.write(len(HV_YOLO))
+        st.write(len(HV_YOLO[0]))
 
         tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
