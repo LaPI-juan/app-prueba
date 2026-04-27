@@ -199,15 +199,15 @@ elif st.session_state.screen == 2:
         #### Carpeta temporal PNG ####
         if 'temp_png_valvs' not in st.session_state:
             HV_valv = [[V_LVOT[:,i,:] for i in range(V_LVOT.shape[2])] for V_LVOT in HV_LVOT]
-            temp_png_valvs, paths_png_valvs  = carpetaPNG_paths(HV_valv[0] ,0)
-            st.session_state.temp_png_valvs = temp_png_valvs
-            st.session_state.paths_png_valvs = paths_png_valvs 
-#            st.session_state.temp_png_valvs = [carpetaPNG(V_valv,0) for V_valv in HV_valv]
+#            temp_png_valvs, paths_png_valvs  = carpetaPNG_paths(HV_valv[0] ,0)
+#            st.session_state.temp_png_valvs = temp_png_valvs
+#            st.session_state.paths_png_valvs = paths_png_valvs 
+            st.session_state.temp_png_valvs = [carpetaPNG(V_valv,0) for V_valv in HV_valv]
 
         temp_png_valvs = st.session_state.temp_png_valvs
-        paths_png_valvs = st.session_state.paths_png_valvs
-        st.write(temp_png_valvs)
-        st.write(paths_png_valvs[0:4])
+#        paths_png_valvs = st.session_state.paths_png_valvs
+#        st.write(temp_png_valvs)
+#        st.write(paths_png_valvs[0:4])
 		
         # ------------------------------------------------------------------------------------
         #                                    YOLO
