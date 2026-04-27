@@ -279,4 +279,17 @@ elif st.session_state.screen == 2:
         #                                   PESTAÑA DETECCION
         # ------------------------------------------------------------------------------------
         with tab3:
-        	st.write('Hola')
+            N_valva_1 = st.slider('',min_value=1, max_value=len(HV_org), step=1, key = 'sld_valva_1')
+            N_valva_2 = st.slider('',min_value=1, max_value=HV_org[0].shape[1], step=1, key = 'sld_valva_2')
+
+            img_orig_user_valva = Image.open(os.path.join(temp_png_YOLOs[N_valva_1-1], f'slice_{(N_valva_2-1):03d}.png'))
+
+            valv1, valv2, valv3 = st.columns([1,2,1])
+            with valv1:
+                st.write('')
+
+            with valv2:
+                st.image(img_orig_user_valva, caption=' ', use_container_width=True)
+
+            with valv3:
+                st.write('')
