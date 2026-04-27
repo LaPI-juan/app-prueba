@@ -214,12 +214,12 @@ elif st.session_state.screen == 2:
         # ------------------------------------------------------------------------------------
         if 'temp_png_YOLOs' not in st.session_state:
             HV_YOLO = [[CargarVolumen_YOLO(ruta) for ruta in rutas] for rutas in temp_png_valvs_chico]
-            #st.session_state.num_YOLO = HV_YOLO[0]
-            st.session_state.temp_png_YOLOs = [carpetaPNG(HV_YOLO[0][:,0,:,:,0],0)]
+            st.session_state.num_YOLO = HV_YOLO[0]
+            #st.session_state.temp_png_YOLOs = [carpetaPNG(HV_YOLO[0][:,0,:,:,0],0)]
 			
-#        HV_YOLO = st.session_state.HV_YOLO
-#        st.write(len(HV_YOLO))
-#        st.write(HV_YOLO[0].shape)
+        HV_YOLO = st.session_state.HV_YOLO
+        st.write(len(HV_YOLO))
+        st.write(HV_YOLO[0].shape)
         temp_png_YOLOs = st.session_state.temp_png_YOLOs
         st.write(len(temp_png_YOLOs))
         st.write(len(temp_png_YOLOs[0]))
