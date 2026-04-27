@@ -221,6 +221,8 @@ elif st.session_state.screen == 2:
 #        st.write(len(HV_YOLO))
 #        st.write(HV_YOLO[0].shape)
         temp_png_YOLOs = st.session_state.temp_png_YOLOs
+        s.write(len(temp_png_YOLOs))
+        s.write(len(temp_png_YOLOs[0]))
 
         tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
