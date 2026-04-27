@@ -214,13 +214,13 @@ elif st.session_state.screen == 2:
         # ------------------------------------------------------------------------------------
         if 'temp_png_YOLOs' not in st.session_state:
             HV_YOLO = [np.array([CargarVolumen_YOLO(ruta) for ruta in rutas]) for rutas in temp_png_valvs_chico]
-            st.session_state.HV_YOLO = HV_YOLO
+#            st.session_state.HV_YOLO = HV_YOLO
             st.session_state.temp_png_YOLOs = [carpetaPNG(V_YOLO[:,0,:,:,0],0) for V_YOLO in HV_YOLO]
 			
-        HV_YOLO = st.session_state.HV_YOLO
-        st.write(len(HV_YOLO))
-        st.write(HV_YOLO[0].shape)
-        #temp_png_YOLOs = st.session_state.temp_png_YOLOs
+#        HV_YOLO = st.session_state.HV_YOLO
+#        st.write(len(HV_YOLO))
+#        st.write(HV_YOLO[0].shape)
+        temp_png_YOLOs = st.session_state.temp_png_YOLOs
 
         tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
@@ -239,7 +239,7 @@ elif st.session_state.screen == 2:
         	N_fnl_1 = st.slider('Corte',min_value=1, max_value=HV_org[0].shape[0], step=1,key ='N_fnl1')
 
         	img_orig_user_1 = Image.open(os.path.join(temp_png_valvs[N_org_1-1], f'slice_{(N_fnl_1-1):03d}.png'))
-        	img_fnl_user_1 = Image.open(os.path.join(temp_png_YOLOs[N_fnl_1-1], f'slice_{(0):03d}.png'))
+        	img_fnl_user_1 = Image.open(os.path.join(temp_png_YOLOs[N_org_1-1][N_fnl_1-1], f'slice_{(0):03d}.png'))
 
         	col1, col2 = st.columns(2)
         	with col1:
