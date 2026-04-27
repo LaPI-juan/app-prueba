@@ -200,22 +200,15 @@ elif st.session_state.screen == 2:
         #### Carpeta temporal PNG ####
         if 'temp_png_valvs' not in st.session_state:
             HV_valv = [[V_LVOT[:,i,:] for i in range(V_LVOT.shape[2])] for V_LVOT in HV_LVOT]
-            st.session_state.HV_valv  = HV_valv 
-#            temp_png_valvs, paths_png_valvs  = carpetaPNG_paths(HV_valv[0] ,0)
-#            st.session_state.temp_png_valvs = temp_png_valvs
-#            st.session_state.paths_png_valvs = paths_png_valvs 
             st.session_state.temp_png_valvs = [carpetaPNG(V_valv,0) for V_valv in HV_valv]
-#            st.session_state.temp_png_valvs_chico = [carpetaPNG(V_valv[0:4],0) for V_valv in HV_valv]
-            HV_valv_numpy = np.array(HV_valv)
-            st.session_state.temp_png_valvs_chico = [carpetaPNG(HV_valv_numpy[:,i,:,:],0) for i in range(0,512)]
+            HV_valv_np = np.array(HV_valv)
+            st.session_state.temp_png_valvs_chico = [carpetaPNG(HV_valv_np[:,i,:,:],0) for i in range(0,512)]
+            HV_valv_NP = [[np.array(V_valv)] for V_valv in HV_valv]
+            #st.session_state.temp_png_valvs_chico = [[carpetaPNG(np.array(V_valv)[:,i,:,:]),0) for i in range(0,512)] for V_valv in HV_valv]  
 
-        HV_valv = st.session_state.HV_valv 
         temp_png_valvs = st.session_state.temp_png_valvs
         temp_png_valvs_chico = st.session_state.temp_png_valvs_chico
-        st.write([len(temp_png_valvs),len(temp_png_valvs_chico)])
-#        paths_png_valvs = st.session_state.paths_png_valvs
-#        st.write(temp_png_valvs)
-#        st.write(paths_png_valvs[0:4])
+        st.write(HV_valv_NP[0].shape)
 		
         # ------------------------------------------------------------------------------------
         #                                    YOLO
@@ -223,16 +216,8 @@ elif st.session_state.screen == 2:
         if 'temp_png_YOLOs' not in st.session_state:
             HV_YOLO = [CargarVolumen_YOLO(ruta) for ruta in temp_png_valvs_chico]
             st.session_state.temp_png_YOLOs = [carpetaPNG(V_YOLO[:,:,:,0],0) for V_YOLO in HV_YOLO]
-#            HV_YOLO = [CargarVolumen_YOLO(temp_png_valvs_chico[0])]
-#            HV_YOLO_NEW = [CargarVolumen_NEW(temp_png_valvs[0])]
-#            st.session_state.HV_YOLO = HV_YOLO
-#            st.session_state.HV_YOLO_NEW = HV_YOLO_NEW
-#            st.session_state.temp_png_YOLOs = [carpetaPNG(V_YOLO[:,:,:,0],0) for V_YOLO in HV_YOLO]
 
         temp_png_YOLOs = st.session_state.temp_png_YOLOs
-#        HV_YOLO = st.session_state.HV_YOLO
-#        HV_YOLO_NEW = st.session_state.HV_YOLO
-#        st.write(HV_YOLO_NEW)
 
         tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
