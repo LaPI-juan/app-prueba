@@ -251,7 +251,7 @@ elif st.session_state.screen == 2:
         	N_fnl_1 = st.slider('Corte',min_value=1, max_value=HV_org[0].shape[0], step=1,key ='N_fnl1')
 
         	img_orig_user_1 = Image.open(os.path.join(temp_png_valvs[N_org_1-1], f'slice_{(N_fnl_1-1):03d}.png'))
-        	img_fnl_user_1 = Image.open(os.path.join(temp_png_YOLOs[N_org_2-1], f'slice_{(0):03d}.png'))
+        	img_fnl_user_1 = Image.open(os.path.join(temp_png_YOLOs[N_fnl_1-1], f'slice_{(0):03d}.png'))
 
         	col1, col2 = st.columns(2)
         	with col1:
