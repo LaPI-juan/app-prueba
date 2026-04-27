@@ -203,12 +203,12 @@ elif st.session_state.screen == 2:
             st.session_state.temp_png_valvs = [carpetaPNG(V_valv,0) for V_valv in HV_valv]
             HV_valv_np = np.array(HV_valv)
             st.session_state.temp_png_valvs_chico = [carpetaPNG(HV_valv_np[:,i,:,:],0) for i in range(0,512)]
-            HV_valv_NP = [[np.array(V_valv)] for V_valv in HV_valv]
+            HV_valv_NP = [np.array(V_valv) for V_valv in HV_valv]
             #st.session_state.temp_png_valvs_chico = [[carpetaPNG(np.array(V_valv)[:,i,:,:]),0) for i in range(0,512)] for V_valv in HV_valv]  
 
         temp_png_valvs = st.session_state.temp_png_valvs
         temp_png_valvs_chico = st.session_state.temp_png_valvs_chico
-        st.write(HV_valv_NP[0][0].shape)
+        st.write(HV_valv_NP[0].shape)
 		
         # ------------------------------------------------------------------------------------
         #                                    YOLO
