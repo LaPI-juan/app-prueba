@@ -205,7 +205,8 @@ elif st.session_state.screen == 2:
 #            st.session_state.temp_png_valvs = temp_png_valvs
 #            st.session_state.paths_png_valvs = paths_png_valvs 
             st.session_state.temp_png_valvs = [carpetaPNG(V_valv,0) for V_valv in HV_valv]
-            st.session_state.temp_png_valvs_chico = [carpetaPNG(V_valv[0:4],0) for V_valv in HV_valv]
+#            st.session_state.temp_png_valvs_chico = [carpetaPNG(V_valv[0:4],0) for V_valv in HV_valv]
+            st.session_state.temp_png_valvs_chico = [carpetaPNG(S_valv,0) for S_valv in HV_valv[0]]
 
         HV_valv = st.session_state.HV_valv 
         temp_png_valvs = st.session_state.temp_png_valvs
@@ -218,19 +219,19 @@ elif st.session_state.screen == 2:
         # ------------------------------------------------------------------------------------
         #                                    YOLO
         # ------------------------------------------------------------------------------------
-        if 'temp_png_YOLOs' not in st.session_state:
+#        if 'temp_png_YOLOs' not in st.session_state:
 #            HV_YOLO = [CargarVolumen_YOLO(ruta) for ruta in temp_png_valvs[0:10]]
 #            st.session_state.temp_png_YOLOs = [carpetaPNG(V_YOLO[:,:,:,0],0) for V_YOLO in HV_YOLO]
-            HV_YOLO = [CargarVolumen_YOLO(temp_png_valvs_chico[0])]
-            HV_YOLO_NEW = [CargarVolumen_NEW(temp_png_valvs[0])]
-            st.session_state.HV_YOLO = HV_YOLO
-            st.session_state.HV_YOLO_NEW = HV_YOLO_NEW
-            st.session_state.temp_png_YOLOs = [carpetaPNG(V_YOLO[:,:,:,0],0) for V_YOLO in HV_YOLO]
+#            HV_YOLO = [CargarVolumen_YOLO(temp_png_valvs_chico[0])]
+#            HV_YOLO_NEW = [CargarVolumen_NEW(temp_png_valvs[0])]
+#            st.session_state.HV_YOLO = HV_YOLO
+#            st.session_state.HV_YOLO_NEW = HV_YOLO_NEW
+#            st.session_state.temp_png_YOLOs = [carpetaPNG(V_YOLO[:,:,:,0],0) for V_YOLO in HV_YOLO]
 
-        temp_png_YOLOs = st.session_state.temp_png_YOLOs
-        HV_YOLO = st.session_state.HV_YOLO
-        HV_YOLO_NEW = st.session_state.HV_YOLO
-        st.write(HV_YOLO_NEW)
+#        temp_png_YOLOs = st.session_state.temp_png_YOLOs
+#        HV_YOLO = st.session_state.HV_YOLO
+#        HV_YOLO_NEW = st.session_state.HV_YOLO
+#        st.write(HV_YOLO_NEW)
 
         tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
