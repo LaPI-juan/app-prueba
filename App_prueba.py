@@ -215,12 +215,12 @@ elif st.session_state.screen == 2:
         if 'temp_png_YOLOs' not in st.session_state:
 #            HV_YOLO = [CargarVolumen_YOLO(ruta) for ruta in temp_png_valvs[0:10]]
 #            st.session_state.temp_png_YOLOs = [carpetaPNG(V_YOLO[:,:,:,0],0) for V_YOLO in HV_YOLO]
-			rutas_valvs = [os.path.join(temp_png_valvs, f) for f in sorted(os.listdir(temp_png))[:1]]
-			st.session_state.rutas_valvs = rutas_valvs
+            rutas_valvs = [os.path.join(temp_png_valvs, f) for f in sorted(os.listdir(temp_png))[:1]]
+            st.session_state.rutas_valvs = rutas_valvs
 #            HV_YOLO = [CargarVolumen_YOLO(ruta) for ruta in rutas_valvs]
 
-		rutas_valvs = st.session_state.rutas_valvs
-		st.write(rutas_valvs)
+        rutas_valvs = st.session_state.rutas_valvs
+        st.write(rutas_valvs)
 
 #        temp_png_YOLOs = st.session_state.temp_png_YOLOs
 
