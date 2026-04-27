@@ -220,12 +220,12 @@ elif st.session_state.screen == 2:
 			
         HV_YOLO = st.session_state.HV_YOLO
         #hv_YOLO = st.session_state.hv_YOLO
-        st.write(len(HV_YOLO))
-        st.write(len(HV_YOLO[0]))
+        #st.write(len(HV_YOLO))
+        #st.write(len(HV_YOLO[0]))
         #st.write(hv_YOLO.shape)
         temp_png_YOLOs = st.session_state.temp_png_YOLOs
-        #st.write(len(temp_png_YOLOs))
-        #st.write(len(temp_png_YOLOs[0]))
+        st.write(len(temp_png_YOLOs))
+        st.write(temp_png_YOLOs[0])
 
         tab1, tab2, tab3 = st.tabs(['Estándar', 'LVOT', 'Mascara'])
 
